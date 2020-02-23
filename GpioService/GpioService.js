@@ -27,7 +27,7 @@ let config = {
 	},
 	sensors: [
 		{
-			path: "/sample/right",
+			path: "/sensor/right",
 			name: "Right sensor",
 			triggerPin: 25,
 			echoPin: 26,
@@ -40,7 +40,7 @@ let config = {
 			}
 		},
 		{
-			path: "/sample/left",
+			path: "/sensor/left",
 			name: "Left sensor",
 			triggerPin: 23,
 			echoPin: 24,
@@ -173,7 +173,6 @@ function exitSensor(idx) {
 }
 
 function onStart(args) {
-
 	if (args && args.length > 0) {
 		const mergedConfig = {...config, ...JSON.parse(args[0]) };
 		config = {...mergedConfig};
@@ -204,8 +203,6 @@ function onExit(options, exitCode) {
 	}
 }
 
-onStart(process.argv.slice(2));
-
 //do something when app is closing
 process.on("exit", onExit.bind(null, {cleanup: true}));
 //catches ctrl+c event
@@ -215,6 +212,7 @@ process.on("SIGUSR1", onExit.bind(null, {exit: true}));
 process.on("SIGUSR2", onExit.bind(null, {exit: true}));
 //catches uncaught exceptions
 process.on("uncaughtException", onExit.bind(null, {exit: true}));
+
 
 service.listen(config.service.gpio.port, () => {
     debugMessage('weservice start listening on port ' + config.service.gpio.port);
@@ -233,3 +231,6 @@ service.get(config.sensors[LEFT].path, (request, response, next) => {
 		value: sensors[LEFT].sample.value
 	});
 });
+
+onStart(process.argv.slice(2));
+
