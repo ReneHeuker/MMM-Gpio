@@ -1,0 +1,12 @@
+{
+  "name": "MMM-Gpio",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "magic mirror",
+    "Gpio",
+    "module"
+  ],
+  "author": "Rene Heuker",
+  "license": "MIT"
+}

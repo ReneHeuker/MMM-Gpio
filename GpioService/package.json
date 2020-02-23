@@ -1,0 +1,15 @@
+{
+  "name": "GpioService",
+  "version": "1.0.0",
+  "description": "(Rest) Service to control GPio pins",
+  "main": "GpioService.js",
+  "scripts": {
+    "test": "echo \"Warning : no test specified\" && exit 1"
+  },
+  "author": "CaReSoft R.G. Heuker",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "onoff": "^5.0.1"
+  }
+}
