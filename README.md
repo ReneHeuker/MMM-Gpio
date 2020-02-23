@@ -5,7 +5,8 @@ It can add GPio functionality to the Magic Mirror whithout having to start the m
 Initial there is support for two HC-SR04 sensors, using them as touchless buttons. 
 The buttons are used to select pages on you mirror.
 
-Wiring the Sensors
+#### Wiring the Sensors
+
 ![Example: hcsr04.png](images/hcsr04.png)
 
 
