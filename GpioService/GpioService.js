@@ -63,6 +63,20 @@ function debugMessage(message) {
 	}
 }
 
+
+function deepMergeConfig(defaults, config) {
+    const mergedConfig = {...defaults, ...config};
+    mergedConfig.service = {...defaults.service, ...config.service};
+    mergedConfig.service.remote = {...defaults.service.remote, ...config.service.remote};
+    mergedConfig.service.gpio = {...defaults.service.gpio, ...config.service.gpio};
+    mergedConfig.sensors[0] =  {...defaults.sensors[0], ...config.sensors[0]};
+    mergedConfig.sensors[0].events =  {...defaults.sensors[0].events, ...config.sensors[0].events};
+    mergedConfig.sensors[1] =  {...defaults.sensors[1], ...config.sensors[1]};
+    mergedConfig.sensors[1].events =  {...defaults.sensors[1].events, ...config.sensors[1].events};
+
+    return mergedConfig;
+}
+
 function postAction(idx, notification) {
 
 	if (notification && notification !== "") {
@@ -174,9 +188,7 @@ function exitSensor(idx) {
 
 function onStart(args) {
 	if (args && args.length > 0) {
-		const mergedConfig = {...config, ...JSON.parse(args[0]) };
-		config = {...mergedConfig};
-		debugMessage('start with overridden config : \n' + JSON.stringify(mergedConfig, null, 2));
+		debugMessage('start with overridden config : \n' + JSON.stringify(deepMergeConfig(config, JSON.parse(args[0])), null, 2));
 	} else {
 		debugMessage('started with default config : \n' + JSON.stringify(config, null, 2));
 	}
